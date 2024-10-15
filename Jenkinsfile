@@ -15,7 +15,7 @@ pipeline {
         stage('docker build') {
             steps {
                 sh ''' 
-                    sudo docker build -t jira .
+                    docker build -t jira .
                 '''
             }
         }
