@@ -8,7 +8,9 @@ pipeline {
             }
         }
         stage('trivy scan'){
-            sh 'trivy fs . > trivyfsoutput.txt'
+            steps {
+                sh 'trivy fs . > trivyfsoutput.txt'
+            }
         }
         stage('docker build') {
             steps {
