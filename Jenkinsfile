@@ -22,7 +22,7 @@ pipeline {
         stage('docker push') {
             steps {
                 sh ''' 
-                    docker login -u surya22ganesh -p Surya@ganesh
+                    docker login -u surya22ganesh -p Surya@1999
                     docker push surya22ganesh/jira
                 '''
             }
@@ -32,5 +32,24 @@ pipeline {
                 sh 'trivy image surya22ganesh/jira > trivyreport.txt'
             }
         }
+         stage('docker container run') {
+            steps {
+                script {
+                    try {
+                        echo 'Starting Docker conatiner...'
+                        sh 'sudo docker run -dit --name jiracontainer -p 80:80 surya22ganesh/jira'
+                    } catch (Exception e) {
+                        echo 'catched the error ! Error: ' + e.toString()
+                        sh 'sudo docker rm jiracontainer -f'
+                        currentBuild.result = 'FAILURE'
+                    } finally {
+                        echo 'Cleaning up...'
+                        sh 'sudo docker run -dit --name jiracontainer -p 80:80 surya22ganesh/jira'
+                    }
+                }
+            }
+        
+        }
+
     }
 }
