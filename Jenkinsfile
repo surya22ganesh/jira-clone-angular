@@ -22,7 +22,7 @@ pipeline {
         stage('docker push') {
             steps {
                 sh ''' 
-                    docker login -u surya22ganesh -p Surya@1999
+                    docker login -u username -p password
                     docker push surya22ganesh/jira
                 '''
             }
