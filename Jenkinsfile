@@ -50,6 +50,13 @@ pipeline {
             }
         
         }
+         stage('docker image prune') {
+            steps {
+                sh ''' 
+                    docker image prune -f
+                '''
+            }
+        }
 
     }
 }
