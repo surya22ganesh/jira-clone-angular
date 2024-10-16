@@ -23,14 +23,13 @@ pipeline {
         //     steps {
         //         sh ''' 
         //             docker login -u surya22ganesh -p Surya@ganesh
-        //             docker push 
+        //             docker push surya22ganesh/jira
         //         '''
         //     }
         // }
-
         // stage('trivy image scan'){
         //     steps{
-        //         sh 'trivy image jira > trivyreport.txt'
+        //         sh 'trivy image surya22ganesh/jira > trivyreport.txt'
         //     }
         // }
     }
